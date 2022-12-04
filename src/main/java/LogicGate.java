@@ -3,4 +3,9 @@
  */
 public enum LogicGate {
     OR,
+    AND,
+    NAND,
+    NOR,
+    XOR,
+    XNOR
 }
