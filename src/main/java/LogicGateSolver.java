@@ -1,22 +1,25 @@
+/**
+ * Object class for the logic gate solver.
+ * Will verify whether operand is valid and call required compute function.
+ *
+ */
+
 public class LogicGateSolver {
+    LogicGate gate;
+    Integer operandA;
+    Integer operandB;
+    Integer result;
 
-    enum LogicGate {
-        OR
-    }
 
-    //TODO Add unit test
-    Integer computeOR(Integer a, Integer b){
-        return a | b;
-    }
-
-    //TODO Support more logic gate types
-    Integer compute(String operator, Integer operandA, Integer operandB){
-        LogicGate logicGate = LogicGate.valueOf(operator);
-        switch(logicGate){
-            case OR:
-                return computeOR(operandA, operandB);
+    public LogicGateSolver(String operator, int a, int b) {
+        if(!isValidLogicGate(operator)){
+            System.out.println(operator + " is an invalid logic gate. Please enter a valid gate.");
+            System.exit(1);
         }
-        return 0;
+        gate = LogicGate.valueOf(operator);
+        operandA = a;
+        operandB = b;
+        result = Compute.compute(gate, operandA, operandB);
     }
 
     boolean isValidLogicGate(String operator){
@@ -25,35 +28,6 @@ public class LogicGateSolver {
                 return true;
             }
         }
-
         return false;
-    }
-
-    public static void main(String args[])
-    {
-        if(args.length != 3){
-            System.out.println("Please enter your request in the following format: Operator Operand1 Operand2");
-            System.exit(1);
-        }
-
-        String operator = args[0];
-        Integer operandA = Integer.parseInt(args[1]);
-        Integer operandB = Integer.parseInt(args[2]);
-
-        if(!(operandA == 0 || operandA == 1) || !(operandB == 0 || operandB == 1)){
-            System.out.println("Please enter operand values as 0 or 1");
-            System.exit(1);
-        }
-
-
-        LogicGateSolver logicComputation = new LogicGateSolver();
-
-        if(!logicComputation.isValidLogicGate(operator)){
-            System.out.println(operator + " is an invalid logic gate. Please enter a valid gate.");
-            System.exit(1);
-        }
-
-        Integer result = logicComputation.compute(operator, operandA, operandB);
-        System.out.println("Result: " + result);
     }
 }
