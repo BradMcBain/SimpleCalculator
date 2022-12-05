@@ -22,7 +22,7 @@ public class LogicGateSolver {
         result = Compute.compute(gate, operandA, operandB);
     }
 
-    boolean isValidLogicGate(String operator){
+    static boolean isValidLogicGate(String operator){
         for(LogicGate lg : LogicGate.values()){
             if(lg.name().equals(operator)){
                 return true;
